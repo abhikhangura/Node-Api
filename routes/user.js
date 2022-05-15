@@ -7,9 +7,11 @@ const userRouter = express.Router();
 userRouter.get("/allUsers", async (req,res) => {
   let users = await User.find();
 
-  res.status(400).json({
+  /*res.status(400).json({
     user : users
-  })
+  })*/
+
+  res.send(`users ${users}`)
 })
 
 userRouter.post("/registerUser", async (req, res) => {
