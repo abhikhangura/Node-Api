@@ -5,8 +5,8 @@ import User from "../model/User.js";
 const userRouter = express.Router();
 
 userRouter.get("/allUsers", async (req, res) => {
-  
-  const {username} = req.body
+
+  const username = req.header
   let user = await User.findOne({username:username});
   console.log(user);
   res.status(201).send(user)
