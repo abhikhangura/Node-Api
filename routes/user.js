@@ -5,7 +5,7 @@ import User from "../model/User.js";
 
 const userRouter = express.Router();
 
-userRouter.get("/allUsers", async (req, res) => {
+userRouter.get("/allUsers/:name", async (req, res) => {
 
   const username = req.query.name
   console.log(username);
