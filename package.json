@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",

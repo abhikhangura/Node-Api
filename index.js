@@ -2,9 +2,9 @@ import express from "express";
 import colors from "colors";
 import morgan from "morgan";
 import dotenv from "dotenv";
-import connectDB from "../config/mongodbConnection.js";
-import userRouter from "../routes/user.js";
-import transactionsRouter from "../routes/transactions.js";
+import connectDB from "./config/mongodbConnection.js";
+import userRouter from "./routes/user.js";
+import transactionsRouter from "./routes/transactions.js";
 
 const http = express();
 const PORT_NUMBER = process.env.PORT_NUMBER || 3000;
@@ -18,7 +18,7 @@ http.use(express.json({
 
 // Config file path
 dotenv.config({
-  path: "../config/config.env",
+  path: "./config/config.env",
 });
 
 // Database Connection
