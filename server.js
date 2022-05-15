@@ -7,7 +7,7 @@ import userRouter from "./routes/user.js";
 import transactionsRouter from "./routes/transactions.js";
 
 const http = express();
-const PORT_NUMBER = process.env.PORT_NUMBER || 3000;
+const PORT_NUMBER = process.env.port || 3000;
 
 http.use(morgan("dev"));
 
