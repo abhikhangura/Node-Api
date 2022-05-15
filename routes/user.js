@@ -1,4 +1,5 @@
 import express from "express";
+import url from "url";
 import bcryptjs from "bcryptjs";
 import User from "../model/User.js";
 
@@ -6,8 +7,9 @@ const userRouter = express.Router();
 
 userRouter.get("/allUsers", async (req, res) => {
 
-  const username = req.header
-  let user = await User.findOne({username:username});
+  const username = req.query.name
+  console.log(username);
+  let user = await User.findOne({usernamae: username});
   console.log(user);
   res.status(201).send(user)
 });
