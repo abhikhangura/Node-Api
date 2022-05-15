@@ -8,11 +8,8 @@ userRouter.get("/allUsers", async (req, res) => {
   //const {username} = req.body
   let user = await User.find();
   console.log(user);
-  res.status(201).json({
-     user
-  
-  })
-})
+  res.status(201).send(user)
+});
 
 userRouter.post("/registerUser", async (req, res) => {
   const { username, name, email, phoneNumber, address, password, access } =
@@ -45,12 +42,12 @@ userRouter.post("/registerUser", async (req, res) => {
         access: access,
       });
 
-      await userDoc.save().catch((err)=>{
-          console.log(err);
-          res.status(500).json({
-              success:false,
-              msg:`Database error ${err}` 
-          })
+      await userDoc.save().catch((err) => {
+        console.log(err);
+        res.status(500).json({
+          success: false,
+          msg: `Database error ${err}`,
+        });
       });
 
       res.status(201).json({
