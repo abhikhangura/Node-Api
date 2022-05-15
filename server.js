@@ -12,9 +12,11 @@ const PORT_NUMBER = process.env.port || 3000;
 http.use(morgan("dev"));
 
 http.use(express.json({}));
-http.use(express.json({
-    extended:true
-}));
+http.use(
+  express.json({
+    extended: true,
+  })
+);
 
 // Config file path
 dotenv.config({
@@ -24,7 +26,10 @@ dotenv.config({
 // Database Connection
 connectDB();
 
-// User registeration 
+http.get("/", (req, res) => {
+  res.send("Welcome to api");
+});
+// User registeration
 http.use("/stm", userRouter);
 
 // Create new tranaction
