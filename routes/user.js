@@ -4,11 +4,12 @@ import User from "../model/User.js";
 
 const userRouter = express.Router();
 
-userRouter.get("/allUsers", async (req, res) => {
-  let users = await User.find();
+userRouter.post("/allUsers", async (req, res) => {
+  const {username} = req.body
+  let user = await User.findOne({username:username});
 
   res.status(201).json({
-    user : users
+     user
   })
 })
 
