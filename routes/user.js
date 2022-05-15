@@ -7,7 +7,7 @@ const userRouter = express.Router();
 userRouter.get("/allUsers", async (req, res) => {
   let users = await User.find();
 
-  res.status(400).json({
+  res.status(201).json({
     user : users
   })
 })
