@@ -16,6 +16,10 @@ userRouter.get("/user/:name", async (req, res) => {
   }
 });
 
+user.Router.get("/stm/name", async (req, res) =>{
+
+})
+
 userRouter.post("/stm/verifyUser", async (req, res) => {
   const email = req.params.email
   const password = req.params.password
