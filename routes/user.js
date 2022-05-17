@@ -1,17 +1,59 @@
 import express from "express";
-import url from "url";
-import bcryptjs from "bcryptjs";
 import User from "../model/User.js";
 
 const userRouter = express.Router();
 
-userRouter.get("/allUsers/:name", async (req, res) => {
+userRouter.get("/user/:name", async (req, res) => {
+  const username = req.params.name;
+  let username_exist = await User.findOne({ username: username });
+  if (username_exist) {
+    res.status(201).send(username_exist);
+  } else {
+    res.status(400).json({
+      success: false,
+      msg: "Not data found",
+    });
+  }
+});
 
-  const username = req.query.name
-  console.log(username);
-  let user = await User.findOne({usernamae: username});
-  console.log(user);
-  res.status(201).send(user)
+userRouter.post("/stm/verifyUser", async (req, res) => {
+  const email = req.params.email
+  const password = req.params.password
+  console.log(email, password);
+  let user = await User.findOne({email: email})
+
+  if(user){
+    if (user.password === password){
+      res.status(201).json({
+        success: true,
+        msg: "Login Successfull",
+      })
+    }
+    else{
+        res.status(400).json({
+          success: false,
+          msg: "Incorrect password. Try again!",
+        })
+    }
+  }
+  else{
+    res.status(400).json({
+      success: false,
+      msg: "Incorrect email. Try again!",
+    })
+  }
+});
+
+userRouter.get("/allUsers", async (req, res) => {
+  let users = await User.find();
+  if (users != null) {
+    res.status(201).send(users);
+  } else {
+    res.status(400).json({
+      success: false,
+      msg: "Not data found",
+    });
+  }
 });
 
 userRouter.post("/registerUser", async (req, res) => {
@@ -27,9 +69,6 @@ userRouter.post("/registerUser", async (req, res) => {
         msg: "Username already exist!!",
       });
     } else {
-      // Initialize the encryption for password
-      const salt = await bcryptjs.genSalt(10);
-      const pass = await bcryptjs.hash(password, salt);
 
       const userDoc = new User({
         username: username,
@@ -41,7 +80,7 @@ userRouter.post("/registerUser", async (req, res) => {
           city: address.city,
           state: address.state,
         },
-        password: pass,
+        password: password,
         access: access,
       });
 

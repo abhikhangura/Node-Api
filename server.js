@@ -1,7 +1,8 @@
 import express from "express";
 import colors from "colors";
-import morgan from "morgan";
+import bodyParser from "body-parser";
 import dotenv from "dotenv";
+import morgan from "morgan";
 import connectDB from "./config/mongodbConnection.js";
 import userRouter from "./routes/user.js";
 import transactionsRouter from "./routes/transactions.js";
@@ -18,6 +19,7 @@ http.use(
   })
 );
 
+http.use(bodyParser.urlencoded({ extended: true }));
 // Config file path
 dotenv.config({
   path: "./config/config.env",
@@ -30,7 +32,7 @@ http.get("/", (req, res) => {
   res.send("Welcome to api");
 });
 // User registeration
-http.use("/stm", userRouter);
+http.use(userRouter);
 
 // Create new tranaction
 http.use("/stm", transactionsRouter);
