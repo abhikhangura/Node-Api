@@ -17,11 +17,11 @@ userRouter.get("/user/:name", async (req, res) => {
 });
 
 
-userRouter.post("/stm/verifyUser", async (req, res) => {
-  const email = req.params.email
+userRouter.post("/verifyUser/:username/:password", async (req, res) => {
+  const username = req.params.username
   const password = req.params.password
-  console.log(email, password);
-  let user = await User.findOne({email: email})
+  console.log(username, password);
+  let user = await User.findOne({username: username})
 
   if(user){
     if (user.password === password){

@@ -35,7 +35,7 @@ http.get("/", (req, res) => {
 http.use(userRouter);
 
 // Create new tranaction
-http.use("/stm", transactionsRouter);
+http.use("/", transactionsRouter);
 
 // Sever running on a specific port
 var server = http.listen(PORT_NUMBER, (req, res) => {
