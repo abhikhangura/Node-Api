@@ -17,7 +17,7 @@ userRouter.get("/user/:name", async (req, res) => {
 });
 
 
-userRouter.post("/verifyUser/:username/:password", async (req, res) => {
+userRouter.post("/verifyUser", async (req, res) => {
   const username = req.params.username
   const password = req.params.password
   console.log(username, password);
