@@ -18,8 +18,8 @@ userRouter.get("/user/:name", async (req, res) => {
 
 
 userRouter.post("/verifyUser", async (req, res) => {
-  const username = req.params.username
-  const password = req.params.password
+  const username = req.body.username
+  const password = req.body.password
   console.log(username, password);
   let user = await User.findOne({username: username})
 
