@@ -11,11 +11,10 @@ userRouter.get("/user/:name", async (req, res) => {
   } else {
     res.status(400).json({
       success: false,
-      msg: "Not data found",
+      msg: "Not data found!",
     });
   }
 });
-
 
 userRouter.post("/verifyUser", async (req, res) => {
   const username = req.body.username
@@ -95,7 +94,7 @@ userRouter.post("/registerUser", async (req, res) => {
 
       res.status(201).json({
         success: true,
-        msg: "User registered successfully !!",
+        msg: "User registered successfully!!",
         user: userDoc,
       });
     }

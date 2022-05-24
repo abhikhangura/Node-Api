@@ -25,7 +25,7 @@ transactionsRouter.post("/newTranaction", async (req, res) => {
 
     res.status(201).json({
         success:true,
-        msg:"Tranaction succesfull !!",
+        msg:"Tranaction succesfull!!",
         transaction: transactionDoc
     })
   } catch (error) {
