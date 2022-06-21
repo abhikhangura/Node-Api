@@ -3,11 +3,11 @@ import User from "../model/User.js";
 
 const userRouter = express.Router();
 
-userRouter.get("/user/:name", async (req, res) => {
-  const email = req.params.name;
-  let username_exist = await User.findOne({ email: email });
-  if (username_exist) {
-    res.status(201).send(username_exist);
+userRouter.post("/user", async (req, res) => {
+  const email = req.body.email;
+  let user = await User.findOne({ email: email });
+  if (user) {
+    res.status(201).send(user);
   } else {
     res.status(400).json({
       success: false,
