@@ -4,8 +4,8 @@ import User from "../model/User.js";
 const userRouter = express.Router();
 
 userRouter.get("/user/:name", async (req, res) => {
-  const username = req.params.name;
-  let username_exist = await User.findOne({ username: username });
+  const email = req.params.name;
+  let username_exist = await User.findOne({ email: email });
   if (username_exist) {
     res.status(201).send(username_exist);
   } else {
@@ -17,34 +17,32 @@ userRouter.get("/user/:name", async (req, res) => {
 });
 
 userRouter.post("/verifyUser", async (req, res) => {
-  const username = req.body.username
-  const password = req.body.password
-  console.log(username, password);
-  let user = await User.findOne({username: username})
+  const email = req.body.email;
+  const password = req.body.password;
+  console.log(email, password);
+  let user = await User.findOne({ email: email });
 
-  if(user){
-    if (user.password === password){
+  if (user) {
+    if (user.password === password) {
       res.status(201).json({
         success: true,
         msg: "Login Successfull",
-      })
+      });
+    } else {
+      res.status(400).json({
+        success: false,
+        msg: "Incorrect password. Try again!",
+      });
     }
-    else{
-        res.status(400).json({
-          success: false,
-          msg: "Incorrect password. Try again!",
-        })
-    }
-  }
-  else{
+  } else {
     res.status(400).json({
       success: false,
-      msg: "Incorrect email. Try again!",
-    })
+      msg: "Incorrect username. Try again!",
+    });
   }
 });
 
-userRouter.get("/allUsers", async (req, res) => {
+userRouter.get("/allUsers", async (_req, res) => {
   let users = await User.find();
   if (users != null) {
     res.status(201).send(users);
@@ -57,11 +55,20 @@ userRouter.get("/allUsers", async (req, res) => {
 });
 
 userRouter.post("/registerUser", async (req, res) => {
-  const { username, name, email, phoneNumber, address, password, access } =
-    req.body;
+  const {
+    name,
+    email,
+    phoneNumber,
+    street,
+    city,
+    state,
+    pin,
+    password,
+    access,
+  } = req.body;
 
   try {
-    let username_exist = await User.findOne({ username: username });
+    let username_exist = await User.findOne({ email: email });
 
     if (username_exist) {
       res.status(400).json({
@@ -69,16 +76,15 @@ userRouter.post("/registerUser", async (req, res) => {
         msg: "Username already exist!!",
       });
     } else {
-
       const userDoc = new User({
-        username: username,
         name: name,
         email: email,
         phoneNumber: phoneNumber,
         address: {
-          street: address.street,
-          city: address.city,
-          state: address.state,
+          street: street,
+          city: city,
+          state: state,
+          pin: pin,
         },
         password: password,
         access: access,

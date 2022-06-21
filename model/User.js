@@ -1,10 +1,6 @@
 import mongoose from "mongoose";
 
 const userSchema = mongoose.Schema({
-  username: {
-    type: String,
-    required: true,
-  },
   name: {
     type: String,
     required: true,
@@ -27,6 +23,10 @@ const userSchema = mongoose.Schema({
       required: true,
     },
     state: {
+      type: String,
+      required: true,
+    },
+    pin: {
       type: String,
       required: true,
     },
