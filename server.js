@@ -6,6 +6,7 @@ import morgan from "morgan";
 import connectDB from "./config/mongodbConnection.js";
 import userRouter from "./routes/user.js";
 import transactionsRouter from "./routes/transactions.js";
+import cardRouter from "./routes/card.js";
 
 const http = express();
 const PORT_NUMBER = process.env.port || 3000;
@@ -36,6 +37,9 @@ http.use(userRouter);
 
 // Create new tranaction
 http.use("/", transactionsRouter);
+
+//Card Details
+http.use(cardRouter);
 
 // Sever running on a specific port
 var server = http.listen(PORT_NUMBER, (req, res) => {
