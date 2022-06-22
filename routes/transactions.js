@@ -5,11 +5,11 @@ const transactionsRouter = express.Router();
 
 //Create a new transaction
 transactionsRouter.post("/newTranaction", async (req, res) => {
-  const { username, amount, cardNumber } = req.body;
+  const { email, amount, cardNumber } = req.body;
     let date = new Date()
   try {
     const transactionDoc = new Transaction({
-      username: username,
+      email: email,
       amount: amount,
       date: date,
       cardNumber: cardNumber,

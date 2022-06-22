@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const transactionSchema = mongoose.Schema({
-  username: {
+  email: {
     type: String,
     required: true,
   },

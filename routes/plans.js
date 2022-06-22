@@ -1,5 +1,5 @@
 import express from "express";
-import Plans from "../model/Plans";
+import Plans from "../model/Plans.js";
 
 const plansRouter = express.Router();
 
@@ -12,3 +12,5 @@ plansRouter.get("/getPlans", async (_req, res) => {
     res.status(400).send("Problem getting plans");
   }
 });
+
+export default plansRouter;
