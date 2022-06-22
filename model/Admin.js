@@ -12,4 +12,4 @@ const admin = mongoose.Schema({
   },
 });
 
-export default mongoose.Model("admin", admin);
+export default mongoose.model("admin", admin);
