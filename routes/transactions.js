@@ -38,7 +38,7 @@ transactionsRouter.post("/newTranaction", async (req, res) => {
 transactionsRouter.post("/getTransactions", async (req, res) => {
   const cardNumber = req.body.cardNumber;
 
-  const transactions_exist = await Transaction.findOne({cardNumber :cardNumber});
+  const transactions_exist = await Transaction.find({cardNumber :cardNumber});
 
   if (transactions_exist) {
     res.status(201).send(transactions_exist);
