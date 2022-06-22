@@ -7,7 +7,8 @@ import connectDB from "./config/mongodbConnection.js";
 import userRouter from "./routes/user.js";
 import transactionsRouter from "./routes/transactions.js";
 import cardRouter from "./routes/card.js";
-import plansRouter from "./routes/plans.js"
+import plansRouter from "./routes/plans.js";
+import adminRouter from "./routes/admin.js";
 
 const http = express();
 const PORT_NUMBER = process.env.port || 3000;
@@ -44,6 +45,9 @@ http.use(cardRouter);
 
 // Plan Details
 http.use(plansRouter);
+
+// amdin
+http.use(adminRouter);
 
 // Sever running on a specific port
 var server = http.listen(PORT_NUMBER, (req, res) => {
