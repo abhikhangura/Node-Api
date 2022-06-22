@@ -1,6 +1,5 @@
 import express from "express";
 import Admin from "../model/Admin.js";
-import admin from "../model/Admin.js";
 
 const adminRouter = express.Router();
 
@@ -12,7 +11,7 @@ adminRouter.post("/verifyAdmin", async (req, res) => {
 
   if (admin) {
     if (admin.password === password) {
-      res.status(201).json({
+      res.status(201).send({
         status:true,
         msg:"Login Successfull!!"
       });
