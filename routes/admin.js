@@ -11,7 +11,7 @@ adminRouter.post("/verifyAdmin", async (req, res) => {
 
   if (admin) {
     if (admin.password === password) {
-      res.status(201).send({
+      res.status(201).json({
         status:true,
         msg:"Login Successfull!!"
       });
