@@ -3,7 +3,7 @@ import Plans from "../model/Plans.js";
 
 const plansRouter = express.Router();
 
-plansRouter.get("/getPlans", async (_req, res) => {
+plansRouter.post("/getPlans", async (_req, res) => {
   let plans = await Plans.find();
 
   if (plans != null) {
