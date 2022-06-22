@@ -4,7 +4,7 @@ import Transaction from "../model/Transactions.js";
 const transactionsRouter = express.Router();
 
 //Create a new transaction
-transactionsRouter.post("/newTranaction", async (req, res) => {
+transactionsRouter.post("/newTransaction", async (req, res) => {
   const { email, amount, cardNumber } = req.body;
   let date = new Date();
   try {
@@ -26,7 +26,6 @@ transactionsRouter.post("/newTranaction", async (req, res) => {
     res.status(201).json({
       success: true,
       msg: "Tranaction succesfull!!",
-      transaction: transactionDoc,
     });
   } catch (error) {
     console.log(error);

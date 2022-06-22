@@ -42,7 +42,6 @@ cardRouter.post("/createCard", async (req, res) => {
       res.status(201).json({
         success: true,
         msg: "Card registered successfully!!",
-        user: cardDoc,
       });
   } catch (error) {
     console.log(error);
