@@ -6,7 +6,7 @@ const transactionsRouter = express.Router();
 //Create a new transaction
 transactionsRouter.post("/newTranaction", async (req, res) => {
   const { email, amount, cardNumber } = req.body;
-    let date = new Date()
+  let date = new Date();
   try {
     const transactionDoc = new Transaction({
       email: email,
@@ -24,10 +24,10 @@ transactionsRouter.post("/newTranaction", async (req, res) => {
     });
 
     res.status(201).json({
-        success:true,
-        msg:"Tranaction succesfull!!",
-        transaction: transactionDoc
-    })
+      success: true,
+      msg: "Tranaction succesfull!!",
+      transaction: transactionDoc,
+    });
   } catch (error) {
     console.log(error);
   }
@@ -35,6 +35,14 @@ transactionsRouter.post("/newTranaction", async (req, res) => {
 
 //Fetch the tranaction
 
-transactionsRouter.get("/tranaction")
+transactionsRouter.get("/tranaction", async (req, res) => {
+  const cardNumber = req.body.cardNumber;
+
+  const transactions_exist = Transaction.find({ cardNumber: cardNumber });
+
+  if (transactions_exist) {
+    res.status(201).send(transactions_exist);
+  }
+});
 
 export default transactionsRouter;
