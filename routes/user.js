@@ -54,6 +54,22 @@ userRouter.get("/allUsers", async (_req, res) => {
   }
 });
 
+userRouter.patch("/grantAccess", async(req,res)=>{
+  const email = req.body.email
+  const access = req.body.access
+
+  try {
+    let user = await User.findOne({email:email})
+    if(user){
+      Object.assign(user,access)
+      user.save()
+      res.send({user})
+    }
+  } catch (error) {
+    
+  }
+})
+
 userRouter.post("/registerUser", async (req, res) => {
   const {
     name,
